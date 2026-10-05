@@ -1,0 +1,4 @@
+*.js linguist-generated=true -whitespace
+*.html linguist-generated=true -whitespace
+*.css linguist-generated=true -whitespace
+*.json linguist-generated=true -whitespace

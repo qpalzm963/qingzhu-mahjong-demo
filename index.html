@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+
+  <title>青竹麻將 · 單機練習</title>
+
+  <!--http://www.html5rocks.com/en/mobile/mobifying/-->
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+
+  <!--https://developer.apple.com/library/safari/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html-->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="format-detection" content="telephone=no">
+
+  <!-- force webkit on 360 -->
+  <meta name="renderer" content="webkit"/>
+  <meta name="force-rendering" content="webkit"/>
+  <!-- force edge on IE -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="msapplication-tap-highlight" content="no">
+
+  <!-- force full screen on some browser -->
+  <meta name="full-screen" content="yes"/>
+  <meta name="x5-fullscreen" content="true"/>
+  <meta name="360-fullscreen" content="true"/>
+
+  <!--fix fireball/issues/3568 -->
+  <!--<meta name="browsermode" content="application">-->
+  <meta name="x5-page-mode" content="app">
+
+  <!--<link rel="apple-touch-icon" href=".png" />-->
+  <!--<link rel="apple-touch-icon-precomposed" href=".png" />-->
+
+  <link rel="stylesheet" type="text/css" href="style.css"/>
+
+<style>
+html,body{margin:0;background:#101f1d;color:#f7f1df;overflow:hidden;font-family:Arial,"PingFang TC",sans-serif}
+#GameDiv{box-sizing:border-box;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+#rotate-tip{display:none;position:fixed;inset:0;z-index:10;background:#101f1d;align-items:center;justify-content:center;flex-direction:column;padding:28px;box-sizing:border-box}
+#rotate-tip .seal{color:#101f1d;background:#dbc28b;border-radius:12px;font:52px "Songti TC",serif;width:84px;line-height:84px;margin-bottom:32px}
+#rotate-tip h1{font:26px "Songti TC",serif;color:#dbc28b;line-height:1.7}#rotate-tip p{font-size:16px;line-height:1.8;color:#a0b7a8}
+@media(orientation:portrait) and (max-width:900px){#rotate-tip{display:flex}}
+#load-error[hidden]{display:none!important}
+#load-error:not([hidden]){display:flex;position:fixed;inset:0;z-index:20;background:#101f1d;align-items:center;justify-content:center;flex-direction:column}
+#load-error button{background:#dbc28b;color:#101f1d;padding:14px 26px;font-size:18px;border:0;border-radius:8px;cursor:pointer}
+</style></head>
+<body>
+  <div id="rotate-tip" role="status"><span class="seal">竹</span><h1>橫放手機，好牌入席。</h1><p>請將裝置轉為橫向，展開完整牌桌。</p></div>
+  <div id="load-error" role="alert" hidden><h1>牌桌未能載入</h1><p>請重新整理頁面，或使用支援 WebGL 的瀏覽器。</p><button onclick="location.reload()">重新載入</button></div>
+  <div id="GameDiv" cc_exact_fit_screen="true">
+      <div id="Cocos3dGameContainer">
+        <canvas id="GameCanvas" oncontextmenu="event.preventDefault()" tabindex="0" aria-label="青竹麻將牌桌。方向鍵選牌，Enter 出牌，H 胡，P 碰，K 槓，C 吃，空白鍵過。"></canvas>
+      </div>
+    </div>
+  
+
+<!-- Polyfills bundle. -->
+
+<script src="src/polyfills.bundle.js" charset="utf-8"> </script>
+
+
+<!-- SystemJS support. -->
+<script src="src/system.bundle.js" charset="utf-8"> </script>
+
+<!-- Import map -->
+<script src="src/import-map.json" type="systemjs-importmap" charset="utf-8"> </script>
+
+<script>
+    System.import('./index.js').catch(function(err) { console.error(err); document.getElementById("load-error").hidden = false; })
+</script>
+
+</body>
+</html>
